@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Gordo"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2019-05-25 11:45:24 AM"/>
+        <attribute name="created" value="R29yZG87TUk1Q09NTUFORFZBTjsyMDE5LTA1LTI0OzExOjU4OjAwIFBNOzI3MzI="/>
+        <attribute name="edited" value="R29yZG87TUk1Q09NTUFORFZBTjsyMDE5LTA1LTI1OzExOjQ1OjI0IEFNOzU7MjgzMg=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="// Program: PaintPricer.java&#13;&#10;// Author: M.Tween &#13;&#10;// Date: 5/21/19 &#13;&#10;// Prices a paint job based on user input&#13;&#10;"/>
+            <comment text="Declare constants (cannot do global inside of flowgorithm"/>
+            <declare name="SQFTPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="SQFTPERGALLON" expression="115"/>
+            <declare name="HOURSPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="HOURSPERGALLON" expression="8"/>
+            <declare name="LABORCOSTPERHOUR" type="Real" array="False" size=""/>
+            <assign variable="LABORCOSTPERHOUR" expression="20"/>
+            <comment text="Declare local variables"/>
+            <declare name="sqFeet" type="Integer" array="False" size=""/>
+            <assign variable="sqFeet" expression="0"/>
+            <declare name="costPerGallon" type="Real" array="False" size=""/>
+            <assign variable="costPerGallon" expression="0"/>
+            <comment text="Prompt for the square footage and read user input"/>
+            <output expression="&quot;Please enter the number of square feet to be painted: &quot;" newline="True"/>
+            <input variable="sqFeet"/>
+            <comment text="Prompt for the cost per gallon and read user input"/>
+            <output expression="&quot;Please enter the paint cost per gallon: &quot;" newline="True"/>
+            <input variable="costPerGallon"/>
+            <comment text="Calling the module that calculates and displays the gallons of paint required and the cost of the paint"/>
+            <call expression="showPaintGallonsAndCost(sqFeet, costPerGallon)"/>
+            <comment text="Calling the module that calculates and displays the labour hours required and charges"/>
+            <call expression="showLaborHoursAndCost(sqFeet)"/>
+            <comment text="Calculates and displays the total cost"/>
+            <call expression="showTotalCost(sqFeet, costPerGallon)"/>
+        </body>
+    </function>
+    <function name="showLaborHoursAndCost" type="None" variable="">
+        <parameters>
+            <parameter name="sqFeet" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <comment text="This module calculates and displays the labour hours required and labour charges"/>
+            <comment text="Declaring my constants since flowgorithm does not support global constants"/>
+            <declare name="SQFTPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="SQFTPERGALLON" expression="115"/>
+            <declare name="HOURSPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="HOURSPERGALLON" expression="8"/>
+            <declare name="LABORCOSTPERHOUR" type="Real" array="False" size=""/>
+            <assign variable="LABORCOSTPERHOUR" expression="20"/>
+            <comment text="Declare local variables"/>
+            <declare name="numGallons" type="Real" array="False" size=""/>
+            <assign variable="numGallons" expression="0"/>
+            <declare name="numHours" type="Real" array="False" size=""/>
+            <assign variable="numHours" expression="0"/>
+            <declare name="laborCost" type="Real" array="False" size=""/>
+            <assign variable="laborCost" expression="0"/>
+            <comment text="Calculate number of hours: number of gallons required * hours per gallon"/>
+            <assign variable="numGallons" expression="sqFeet / SQFTPERGALLON"/>
+            <assign variable="numHours" expression="numGallons * HOURSPERGALLON"/>
+            <comment text="Calculate labour cost: number of hours * labour cost per hour"/>
+            <assign variable="laborCost" expression="numHours * LABORCOSTPERHOUR"/>
+            <comment text="Display the results to the user"/>
+            <output expression="&quot;Labor hours required: &quot; &amp; numHours" newline="True"/>
+            <output expression="&quot;Labor cost is $&quot; &amp; laborCost" newline="True"/>
+        </body>
+    </function>
+    <function name="showPaintGallonsAndCost" type="None" variable="">
+        <parameters>
+            <parameter name="sqFeet" type="Integer" array="False"/>
+            <parameter name="costPerGallon" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <comment text="This module takes the user input and calculates the number of gallons needed and cost of the paint"/>
+            <comment text="Declaring my constants since flowgorithm doesn't support global constants"/>
+            <declare name="SQFTPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="SQFTPERGALLON" expression="115"/>
+            <declare name="HOURSPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="HOURSPERGALLON" expression="8"/>
+            <declare name="LABORCOSTPERHOUR" type="Real" array="False" size=""/>
+            <assign variable="LABORCOSTPERHOUR" expression="20"/>
+            <comment text="local variables"/>
+            <declare name="numGallons" type="Real" array="False" size=""/>
+            <assign variable="numGallons" expression="0"/>
+            <declare name="paintCost" type="Real" array="False" size=""/>
+            <assign variable="paintCost" expression="0"/>
+            <comment text="Calculate the number of gallons / square feet per gallon"/>
+            <assign variable="numGallons" expression="sqFeet / SQFTPERGALLON"/>
+            <comment text="Calculate the paint cost = number of gallons * cost per gallon"/>
+            <assign variable="paintCost" expression="numGallons * costPerGallon"/>
+            <comment text="Display the results to the user"/>
+            <output expression="&quot;Number of gallons of paint required: &quot; &amp; numGallons" newline="True"/>
+            <output expression="&quot;Paint cost is $&quot; &amp; paintCost" newline="True"/>
+            <comment text="ends this module and returns to call point"/>
+        </body>
+    </function>
+    <function name="showTotalCost" type="None" variable="">
+        <parameters>
+            <parameter name="sqFeet" type="Real" array="False"/>
+            <parameter name="costPerGallon" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <comment text="This module calculates and displays the total cost"/>
+            <comment text="Declaring my constants since flowgorithm doesn't support global constants"/>
+            <declare name="SQFTPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="SQFTPERGALLON" expression="115"/>
+            <declare name="HOURSPERGALLON" type="Integer" array="False" size=""/>
+            <assign variable="HOURSPERGALLON" expression="8"/>
+            <declare name="LABORCOSTPERHOUR" type="Real" array="False" size=""/>
+            <assign variable="LABORCOSTPERHOUR" expression="20"/>
+            <comment text="Declaring local variables"/>
+            <declare name="numGallons" type="Real" array="False" size=""/>
+            <assign variable="numGallons" expression="0"/>
+            <declare name="paintCost" type="Real" array="False" size=""/>
+            <assign variable="paintCost" expression="0"/>
+            <declare name="numHours" type="Real" array="False" size=""/>
+            <assign variable="numHours" expression="0"/>
+            <declare name="laborCost" type="Real" array="False" size=""/>
+            <assign variable="laborCost" expression="0"/>
+            <comment text="Calculate the number of gallons = square footage/square feet"/>
+            <assign variable="numGallons" expression="sqFeet / SQFTPERGALLON"/>
+            <comment text="Calculate paint cost = number of gallons * cost per gallon"/>
+            <assign variable="paintCost" expression="numGallons * costPerGallon"/>
+            <comment text="Calculate number of hours = number of gallons required * hours per gallon"/>
+            <assign variable="numHours" expression="numGallons * HOURSPERGALLON"/>
+            <comment text="Calculate the labour cost = number of hours * labour cost per hour"/>
+            <assign variable="laborCost" expression="numHours * LABORCOSTPERHOUR"/>
+            <comment text="Display the results"/>
+            <output expression="&quot;Total cost is $&quot; &amp; (paintCost + laborCost)" newline="True"/>
+            <comment text="Module ends and returns to call point"/>
+        </body>
+    </function>
+</flowgorithm>
